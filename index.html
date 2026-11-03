@@ -144,4 +144,6 @@ function selectTripDate(date){
 function updateCountdown(){const now=new Date();const today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());const departure=Date.UTC(2026,11,18);const remaining=Math.round((departure-today)/86400000);const number=$('countdown-days'),caption=$('countdown-caption');if(remaining>0){number.textContent=remaining;caption.textContent=(remaining===1?'dia para a viagem':'dias para a viagem')+' · 18/12/2026'}else if(remaining===0){number.textContent='É hoje!';caption.textContent='✈️ Partida para Lisboa · 17h40'}else{number.textContent='🦇';caption.textContent='A viagem começou em 18/12/2026'}}
 updateCountdown();updateCountryHeader();setInterval(()=>{updateCountdown();updateCountryHeader()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){updateCountdown();updateCountryHeader()}});
 render();
+/* Ao abrir o roteiro, mostrar 14/12/2026 como primeira data visivel no cronograma. */
+requestAnimationFrame(()=>{const gantt=document.getElementById('gantt');const board=gantt&&gantt.querySelector('.gantt-board');if(!board)return;const dayWidth=parseFloat(getComputedStyle(board).getPropertyValue('--dayw'))||28;gantt.scrollTo({left:13*dayWidth,behavior:'instant'});});
 </script></body></html>
